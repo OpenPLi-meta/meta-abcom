@@ -27,6 +27,7 @@ SRC_URI = "http://121.143.3.35/pulse4k/linux/linux-${PV}-${SRCDATE}-${ARCH}.tar.
 	file://0003-dont-mark-register-as-const.patch \
 	file://0004-linux-fix-buffer-size-warning-error.patch \
 	file://Backport_minimal_compiler_attributes_h_to_support_GCC_9.patch \
+	file://make-yyloc-declaration-extern.patch \
 "
 
 # By default, kernel.bbclass modifies package names to allow multiple kernels
