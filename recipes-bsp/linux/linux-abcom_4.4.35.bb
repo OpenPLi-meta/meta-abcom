@@ -9,7 +9,7 @@ SRCDATE = "20210203"
 COMPATIBLE_MACHINE = "(pulse4k|pulse4kmini)"
 
 inherit kernel machine_kernel_pr
-MACHINE_KERNEL_PR_append = "r0.1"
+MACHINE_KERNEL_PR:append = "r0.1"
 
 SRC_URI[arm.md5sum] = "f9e67e2d0ceab518510413f8f4315bc3"
 SRC_URI[arm.sha256sum] = "45ae717b966a74326fd7297d81b3a17fd5b3962b7704170682a615ca7cdec644"
@@ -33,10 +33,10 @@ SRC_URI = "http://121.143.3.35/pulse4k/linux/linux-${PV}-${SRCDATE}-${ARCH}.tar.
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned
 # package names instead, to allow only one kernel to be installed.
-PKG_${KERNEL_PACKAGE_NAME}-base = "kernel-base"
-PKG_${KERNEL_PACKAGE_NAME}-image = "kernel-image"
-RPROVIDES_${KERNEL_PACKAGE_NAME}-base = "kernel-${KERNEL_VERSION}"
-RPROVIDES_${KERNEL_PACKAGE_NAME}-image = "kernel-image-${KERNEL_VERSION}"
+PKG:${KERNEL_PACKAGE_NAME}-base = "kernel-base"
+PKG:${KERNEL_PACKAGE_NAME}-image = "kernel-image"
+RPROVIDES:${KERNEL_PACKAGE_NAME}-base = "kernel-${KERNEL_VERSION}"
+RPROVIDES:${KERNEL_PACKAGE_NAME}-image = "kernel-image-${KERNEL_VERSION}"
 
 S = "${WORKDIR}/linux-${PV}"
 
@@ -46,19 +46,19 @@ KERNEL_IMAGEDEST = "tmp"
 KERNEL_IMAGETYPE = "uImage"
 KERNEL_OUTPUT = "arch/${ARCH}/boot/${KERNEL_IMAGETYPE}"
 
-FILES_${KERNEL_PACKAGE_NAME}-image = "/${KERNEL_IMAGEDEST}/findkerneldevice.sh"
+FILES:${KERNEL_PACKAGE_NAME}-image = "/${KERNEL_IMAGEDEST}/findkerneldevice.sh"
 
-kernel_do_configure_prepend() {
+kernel_do_configure:prepend() {
 	install -d ${B}/usr
 	install -m 0644 ${WORKDIR}/initramfs-subdirboot.cpio.gz ${B}/
 }
 
-kernel_do_install_append() {
+kernel_do_install:append() {
 	install -d ${D}/${KERNEL_IMAGEDEST}
 	install -m 0755 ${WORKDIR}/findkerneldevice.sh ${D}/${KERNEL_IMAGEDEST}
 }
 
-pkg_postinst_kernel-image() {
+pkg_postinst:kernel-image() {
 	if [ "x$D" == "x" ]; then
 		if [ -f /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ] ; then
 			/${KERNEL_IMAGEDEST}/./findkerneldevice.sh

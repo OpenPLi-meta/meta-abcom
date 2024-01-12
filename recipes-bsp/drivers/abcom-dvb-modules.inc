@@ -12,7 +12,7 @@ S = "${WORKDIR}"
 
 INHIBIT_PACKAGE_STRIP = "1"
 
-FILES_${PN} += "${sysconfdir}/modprobe.d/${MACHINE}.conf ${base_libdir}/modules/${KV}/extra"
+FILES:${PN} += "${sysconfdir}/modprobe.d/${MACHINE}.conf ${base_libdir}/modules/${KV}/extra"
 
 do_compile() {
 }
@@ -26,7 +26,7 @@ do_install() {
 	done
 }
 
-pkg_prerm_${PN}() {
+pkg_prerm:${PN}() {
 	if [ "x$D" == "x" ]; then
 		if [ -f /lib/modules/${KV}/extra/hi_play.ko ] ; then
 			rm -f /lib/modules/${KV}/extra/hi_play.ko;
