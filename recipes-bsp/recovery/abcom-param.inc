@@ -7,7 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit deploy
 
-SRC_URI = "http://121.143.3.35/${MACHINE}/recovery/${MACHINE}-param-${SRCDATE}.zip"
+SRC_URI = "http://downloads.openpli.org/archive/abcom/${MACHINE}-param-${SRCDATE}.zip"
 
 S = "${WORKDIR}"
 
