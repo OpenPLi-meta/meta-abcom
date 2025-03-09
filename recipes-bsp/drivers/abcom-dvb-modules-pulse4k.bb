@@ -1,7 +1,8 @@
 KV = "4.4.35"
 SRCDATE = "20220504"
 
-PROVIDES = "virtual/blindscan-dvbs"
+PROVIDES += "virtual/blindscan-dvbs"
+RPROVIDES:${PN} += "virtual-blindscan-dvbs"
 
 require abcom-dvb-modules.inc
 
