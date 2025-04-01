@@ -7,7 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit deploy
 
-SRC_URI = "http://121.143.3.35/${MACHINE}/recovery/${MACHINE}-fastboot-${SRCDATE}.zip"
+SRC_URI = "http://downloads.openpli.org/archive/abcom/${MACHINE}-fastboot-${SRCDATE}.zip"
 
 S = "${WORKDIR}"
 
